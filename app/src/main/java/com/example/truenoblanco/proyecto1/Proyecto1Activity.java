@@ -35,10 +35,10 @@ public class Proyecto1Activity extends ListActivity {
                 e.printStackTrace();
             }
         }else{
-            BDhelper.abrir();
-            String tost=BDhelper.llenarBDCarnet();
+           /* BDhelper.abrir();
+            String tost=BDhelper.llenarBD();
             BDhelper.cerrar();
-            Toast.makeText(this, tost, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, tost, Toast.LENGTH_SHORT).show();*/
         }
     }
 }

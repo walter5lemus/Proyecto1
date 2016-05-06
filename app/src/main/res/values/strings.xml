@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Proyecto1</string>
+    <string name="app_name">Proyectos de Graduacion</string>
+    <string name="Codigo">Codigo</string>
+    <string name="nombre">nombre</string>
+    <string name="apellido">apellido</string>
+    <string name="escuela">escuela</string>
+    <string name="insertar">insertar</string>
+    <string name="limpiar">limpiar</string>
+
 </resources>

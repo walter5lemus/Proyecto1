@@ -10,33 +10,32 @@ import android.widget.Toast;
 public class DocenteInsertar extends Activity {
 
     ControlBD helper;
-    EditText editCarnet;
+    EditText editCodigo;
     EditText editNombre;
     EditText editApellido;
-    EditText editSexo;
+    EditText editEscuela;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alumno_insertar);
+        setContentView(R.layout.activity_docente_insertar);
         helper = new ControlBD(this);
-        editCarnet = (EditText) findViewById(R.id.editCarnet);
-        editNombre = (EditText) findViewById(R.id.editNombre);
-        editApellido = (EditText) findViewById(R.id.editApellido);
-        editSexo = (EditText) findViewById(R.id.editSexo);
+        editCodigo = (EditText) findViewById(R.id.etCodigo);
+        editNombre = (EditText) findViewById(R.id.etNombre);
+        editApellido = (EditText) findViewById(R.id.etApellido);
+        editEscuela = (EditText) findViewById(R.id.etEscuela);
     }
-    public void insertarAlumno(View v) {
-        String carnet=editCarnet.getText().toString();
+    public void insertarDocente(View v) {
+        int codigo=Integer.parseInt(editCodigo.getText().toString());
         String nombre=editNombre.getText().toString();
         String apellido=editApellido.getText().toString();
-        String sexo=editSexo.getText().toString();
+        String escuela=editEscuela.getText().toString();
         String regInsertados;
-        Alumno alumno=new Alumno();
-        alumno.setCarnet(carnet);
-        alumno.setNombre(nombre);
-        alumno.setApellido(apellido);
-        alumno.setSexo(sexo);
-        alumno.setMatganadas(0);
+        Docente docente=new Docente();
+        docente.setCodigoDocente(codigo);
+        docente.setNombreDocente(nombre);
+        docente.setApellidoDocente(apellido);
+        docente.setEscuela(escuela);
         helper.abrir();
-        regInsertados=helper.insertar(alumno);
+        regInsertados=helper.insertar(docente);
         helper.cerrar();
         Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
     }
