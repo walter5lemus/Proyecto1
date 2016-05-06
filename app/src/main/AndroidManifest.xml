@@ -15,7 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ControlBDActivity" />
         <activity android:name=".Docente" />
         <activity android:name=".DocenteActualizar" />
         <activity android:name=".DocenteConsultar" />
@@ -27,7 +26,8 @@
         <activity android:name=".DetalleDocenteConsultar" />
         <activity android:name=".DetalleDocenteEliminar" />
         <activity android:name=".DetalleDocenteInsertar" />
-        <activity android:name=".DetalleDocenteMenu"></activity>
+        <activity android:name=".DetalleDocenteMenu" />
+        <activity android:name=".ControlBD"></activity>
     </application>
 
 </manifest>

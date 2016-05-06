@@ -7,8 +7,8 @@ public class Docente extends AppCompatActivity {
 
 
     private int codigoDocente;
-    private int CodigoGrupo;
-    private int tipoRol;
+    private int nombreDocente;
+    private int apellidoDocente;
     private String escuela;
 
 
@@ -26,20 +26,20 @@ public class Docente extends AppCompatActivity {
         this.codigoDocente = codigoDocente;
     }
 
-    public int getCodigoGrupo() {
-        return CodigoGrupo;
+    public int getNombreDocente() {
+        return nombreDocente;
     }
 
-    public void setCodigoGrupo(int codigoGrupo) {
-        CodigoGrupo = codigoGrupo;
+    public void setNombreDocente(int nombreDocente) {
+        this.nombreDocente = nombreDocente;
     }
 
-    public int getTipoRol() {
-        return tipoRol;
+    public int getApellidoDocente() {
+        return apellidoDocente;
     }
 
-    public void setTipoRol(int tipoRol) {
-        this.tipoRol = tipoRol;
+    public void setApellidoDocente(int apellidoDocente) {
+        this.apellidoDocente = apellidoDocente;
     }
 
     public String getEscuela() {
@@ -50,3 +50,5 @@ public class Docente extends AppCompatActivity {
         this.escuela = escuela;
     }
 }
+
+
