@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.truenoblanco.proyecto1">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Proyecto1Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ControlBDActivity" />
+        <activity android:name=".Docente" />
+        <activity android:name=".DocenteActualizar" />
+        <activity android:name=".DocenteConsultar" />
+        <activity android:name=".DocenteEliminar" />
+        <activity android:name=".DocenteInsertar" />
+        <activity android:name=".DocenteMenu" />
+        <activity android:name=".DetalleDocente" />
+        <activity android:name=".DetalleDocenteActualizar" />
+        <activity android:name=".DetalleDocenteConsultar" />
+        <activity android:name=".DetalleDocenteEliminar" />
+        <activity android:name=".DetalleDocenteInsertar" />
+        <activity android:name=".DetalleDocenteMenu"></activity>
+    </application>
+
+</manifest>
