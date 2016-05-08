@@ -6,7 +6,7 @@ import android.os.Bundle;
 public class Docente extends AppCompatActivity {
 
 
-    private int codigoDocente;
+    private String codigoDocente;
     private String nombreDocente;
     private String apellidoDocente;
     private String escuela;
@@ -18,11 +18,12 @@ public class Docente extends AppCompatActivity {
         setContentView(R.layout.activity_docente);
     }
 
-    public int getCodigoDocente() {
+
+    public String getCodigoDocente() {
         return codigoDocente;
     }
 
-    public void setCodigoDocente(int codigoDocente) {
+    public void setCodigoDocente(String codigoDocente) {
         this.codigoDocente = codigoDocente;
     }
 

@@ -93,7 +93,7 @@
         android:layout_toLeftOf="@+id/btnLimpiar"
         android:layout_toStartOf="@+id/btnLimpiar"
         android:layout_marginTop="24dp"
-        android:onClick="insertarAlumno" />
+        android:onClick="insertarDocente" />
 
     <Button
         android:layout_width="wrap_content"
@@ -104,7 +104,8 @@
         android:layout_alignRight="@+id/etEscuela"
         android:layout_alignEnd="@+id/etEscuela"
         android:layout_marginRight="57dp"
-        android:layout_marginEnd="57dp" />
+        android:layout_marginEnd="57dp"
+        android:onClick="limpiarTexto" />
 
 </RelativeLayout>
 

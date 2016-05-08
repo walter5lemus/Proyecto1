@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class Proyecto1Activity extends ListActivity {
 
     String[] menu={"Tabla Docente","Tabla DetalleDocente","LLenar Base de Datos"};
-    String[] activities={"DetalleDocente","Docente"};
+    String[] activities={"DocenteMenu","DetalleDocenteMenu"};
     ControlBD BDhelper;
 
     @Override
@@ -25,7 +25,7 @@ public class Proyecto1Activity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l,View v,int position,long id){
         super.onListItemClick(l, v, position, id);
-        if(position!=3){
+        if(position!=2){
             String nombreValue=activities[position];
             try{
                 Class<?> clase=Class.forName("com.example.truenoblanco.proyecto1."+nombreValue);
@@ -35,10 +35,10 @@ public class Proyecto1Activity extends ListActivity {
                 e.printStackTrace();
             }
         }else{
-           /* BDhelper.abrir();
+            BDhelper.abrir();
             String tost=BDhelper.llenarBD();
             BDhelper.cerrar();
-            Toast.makeText(this, tost, Toast.LENGTH_SHORT).show();*/
+            Toast.makeText(this, tost, Toast.LENGTH_SHORT).show();
         }
     }
 }

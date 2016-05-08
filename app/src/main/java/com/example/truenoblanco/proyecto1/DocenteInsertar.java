@@ -24,7 +24,7 @@ public class DocenteInsertar extends Activity {
         editEscuela = (EditText) findViewById(R.id.etEscuela);
     }
     public void insertarDocente(View v) {
-        int codigo=Integer.parseInt(editCodigo.getText().toString());
+        String codigo=editCodigo.getText().toString();
         String nombre=editNombre.getText().toString();
         String apellido=editApellido.getText().toString();
         String escuela=editEscuela.getText().toString();
@@ -40,9 +40,9 @@ public class DocenteInsertar extends Activity {
         Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
     }
     public void limpiarTexto(View v) {
-        editCarnet.setText("");
+        editCodigo.setText("");
         editNombre.setText("");
         editApellido.setText("");
-        editSexo.setText("");
+        editEscuela.setText("");
     }
 }
