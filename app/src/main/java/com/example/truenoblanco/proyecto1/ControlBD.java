@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class ControlBD {
 
     private static final String[]camposDocente = new String [] {"codigodocente","nombredocente","apellidodocente","escuela"};
-    private static final String[]camposDetalleDocente = new String [] {"codigo","codGrupo","tiporol","nombrerol"};
+    private static final String[]camposDetalleDocente = new String [] {"codigodocente","codigogrupo","tiporol","nombrerol"};
 
 
     private final Context context;
@@ -42,6 +42,50 @@ public class ControlBD {
         }else{
             return null;
         }
+    }
+
+    public String actualizar(Docente docente){
+
+        if(verificarIntegridad(docente, 1)){
+
+            String[] id = {docente.getCodigoDocente()};
+            ContentValues cv = new ContentValues();
+            cv.put("nombredocente", docente.getNombreDocente());
+            cv.put("apellidodocente", docente.getApellidoDocente());
+            cv.put("escuela", docente.getEscuela());
+            db.update("docente", cv, "codigodocente = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + docente.getCodigoDocente() + " no existe";
+        }
+    }
+
+    public String eliminar(Docente docente){
+        //Eliminacion en cascada
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        if (verificarIntegridad(docente,2)) {
+            contador+=db.delete("detalledocente", "codigodocente='"+docente.getCodigoDocente()+"'", null);
+        }
+        contador+=db.delete("docente", "codigodocente='"+docente.getCodigoDocente()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+    public String eliminar2(Docente docente){
+        //Eliminacion Restringida
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        if (verificarIntegridad(docente,3)) {
+            regAfectados="Error, existen registros asociados";
+        }
+        else
+        {
+            contador+=db.delete("alumno", "carnet='"+docente.getCodigoDocente()+"'", null);
+            regAfectados+=contador;
+        }
+
+
+        return regAfectados;
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
@@ -116,7 +160,7 @@ public class ControlBD {
 
             case 1:
             {
-                //verificar que exista alumno
+                //verificar que exista docente
                 Docente docente2 = (Docente)dato;
                 String[] id = {docente2.getCodigoDocente()};
                 abrir();
@@ -127,6 +171,16 @@ public class ControlBD {
                 }
                 return false;
             }
+            case 2:
+            {
+                Docente docente = (Docente)dato;
+                Cursor c=db.query(true, "detalledocente", new String[] {"codigo" }, "codigo='"+docente.getCodigoDocente()+"'",null, null, null, null, null);
+                if(c.moveToFirst())
+                    return true;
+                else
+                    return false;
+            }
+
 
 
 
