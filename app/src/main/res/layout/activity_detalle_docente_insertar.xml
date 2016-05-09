@@ -9,4 +9,76 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.truenoblanco.proyecto1.DetalleDocenteInsertar">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Codigo"
+        android:id="@+id/textView14"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editCodigo"
+        android:layout_below="@+id/textView14"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Codigo de Grupo"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/editCodigo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editCodGrupo"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tipo de Rol"
+        android:id="@+id/textView16"
+        android:layout_below="@+id/editCodGrupo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTipoRol"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView16"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insertar"
+        android:id="@+id/btnInsertar"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/textView16"
+        android:layout_alignEnd="@+id/textView16"
+        android:onClick="insertarDetalleDocente" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Limpiar"
+        android:id="@+id/btnLimpiar"
+        android:layout_alignTop="@+id/btnInsertar"
+        android:layout_toRightOf="@+id/textView15"
+        android:layout_toEndOf="@+id/textView15" />
 </RelativeLayout>

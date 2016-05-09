@@ -1,13 +1,30 @@
 package com.example.truenoblanco.proyecto1;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class DetalleDocenteEliminar extends AppCompatActivity {
+public class DetalleDocenteEliminar extends Activity {
 
+    EditText editCodigo;
+    ControlBD controlhelper;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_docente_eliminar);
+        controlhelper=new ControlBD (this);
+        editCodigo=(EditText)findViewById(R.id.editCodigo);
     }
+    public void eliminarDetalleDocente(View v){
+        String regEliminadas;
+        DetalleDocente detalleDocente=new DetalleDocente();
+        detalleDocente.setCodigoDocente(editCodigo.getText().toString());
+        controlhelper.abrir();
+        regEliminadas=controlhelper.eliminar(detalleDocente);
+        controlhelper.cerrar();
+        Toast.makeText(this, regEliminadas, Toast.LENGTH_SHORT).show();
+    }
+
 }

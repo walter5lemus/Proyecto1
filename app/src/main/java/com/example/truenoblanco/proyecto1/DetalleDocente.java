@@ -5,10 +5,9 @@ import android.os.Bundle;
 
 public class DetalleDocente extends AppCompatActivity {
 
-    private int codigoDocente;
-    private int codigoGrupo;
-    private int tipoRol;
-    private String nombreRol;
+    private String codigoDocente;
+    private String codigoGrupo;
+    private String tipoRol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,35 +15,27 @@ public class DetalleDocente extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_docente);
     }
 
-    public int getCodigoDocente() {
+    public String getCodigoDocente() {
         return codigoDocente;
     }
 
-    public void setCodigoDocente(int codigoDocente) {
+    public void setCodigoDocente(String codigoDocente) {
         this.codigoDocente = codigoDocente;
     }
 
-    public int getCodigoGrupo() {
+    public String getCodigoGrupo() {
         return codigoGrupo;
     }
 
-    public void setCodigoGrupo(int codigoGrupo) {
+    public void setCodigoGrupo(String codigoGrupo) {
         this.codigoGrupo = codigoGrupo;
     }
 
-    public int getTipoRol() {
+    public String getTipoRol() {
         return tipoRol;
     }
 
-    public void setTipoRol(int tipoRol) {
+    public void setTipoRol(String tipoRol) {
         this.tipoRol = tipoRol;
-    }
-
-    public String getNombreRol() {
-        return nombreRol;
-    }
-
-    public void setNombreRol(String nombreRol) {
-        this.nombreRol = nombreRol;
     }
 }
