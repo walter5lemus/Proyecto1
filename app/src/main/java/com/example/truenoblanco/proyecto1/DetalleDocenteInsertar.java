@@ -3,7 +3,9 @@ package com.example.truenoblanco.proyecto1;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class DetalleDocenteInsertar extends Activity {
@@ -13,29 +15,41 @@ public class DetalleDocenteInsertar extends Activity {
     EditText editCodigoGrupo;
     EditText editTipoRol;
     EditText editNombreDocente;
+    Spinner spinnerl;
+
+    final String[] datos = new String[]{"Jurado","Docente"};
+
+
+
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_docente_insertar);
         helper = new ControlBD(this);
+
+        spinnerl = (Spinner) findViewById(R.id.spinner);
+        String []opciones={"Jurado","Docente"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opciones);
+
+
         editCodigo = (EditText) findViewById(R.id.editCodigo);
         editCodigoGrupo = (EditText) findViewById(R.id.editCodigoGrupo);
         editTipoRol = (EditText) findViewById(R.id.editTipoRol);
-        editNombreDocente = (EditText) findViewById(R.id.editNombreDocente);
+        spinnerl.setAdapter(adapter);
+
     }
     public void insertarDetalleDocente(View v) {
         String regInsertados;
         String codigo=editCodigo.getText().toString();
         String codigogrupo=editCodigoGrupo.getText().toString();
-        String tiporol=editTipoRol.getText().toString();
-        String nombreDocente=editNombreDocente.getText().toString();
+        String selec = spinnerl.getSelectedItem().toString();
 
 
         DetalleDocente detalledocente= new DetalleDocente();
         detalledocente.setCodigoDocente(codigo);
         detalledocente.setCodigoGrupo(codigogrupo);
-        detalledocente.setTipoRol(tiporol);
-        detalledocente.setTipoRol(nombreDocente);
+        detalledocente.setTipoRol(selec);
         helper.abrir();
         regInsertados=helper.insertar(detalledocente);
         helper.cerrar();

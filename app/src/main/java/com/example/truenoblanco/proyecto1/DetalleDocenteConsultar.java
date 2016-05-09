@@ -13,6 +13,7 @@ public class DetalleDocenteConsultar extends Activity {
     EditText editCodigo;
     EditText editCodigoGrupo;
     EditText editTipoRol;
+    EditText editnombreDocente;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class DetalleDocenteConsultar extends Activity {
         editCodigo = (EditText) findViewById(R.id.editCodigo);
         editCodigoGrupo = (EditText) findViewById(R.id.editCodigoGrupo);
         editTipoRol = (EditText) findViewById(R.id.editTipoRol);
+        editnombreDocente = (EditText) findViewById(R.id.editNombreDocente);
     }
 
     public void consultarDetalleDocente(View v) {
@@ -34,6 +36,7 @@ public class DetalleDocenteConsultar extends Activity {
             editCodigo.setText(detalleDocente.getCodigoDocente());
             editCodigoGrupo.setText(detalleDocente.getCodigoGrupo());
             editTipoRol.setText(detalleDocente.getTipoRol());
+            editnombreDocente.setText(detalleDocente.getNombreDocente());
         }
     }
 
@@ -41,5 +44,6 @@ public class DetalleDocenteConsultar extends Activity {
         editCodigo.setText("");
         editCodigoGrupo.setText("");
         editTipoRol.setText("");
+        editnombreDocente.setText("");
     }
 }

@@ -94,6 +94,7 @@ public class ControlBD {
             detalledocente.setCodigoDocente(cursor.getString(0));
             detalledocente.setCodigoGrupo(cursor.getString(1));
             detalledocente.setTipoRol(cursor.getString(2));
+            detalledocente.setNombreDocente(cursor.getString(3));
             return detalledocente;
         }else{
             return null;
@@ -256,7 +257,7 @@ public class ControlBD {
     public String llenarBD(){
 
         final String[] VDcodigo = {"LV10022","SC12054"};
-        final String[] VDnombre = {"Waler","Cristian"};
+        final String[] VDnombre = {"Walter","Cristian"};
         final String[] VDapellido = {"Lemus","Sosa"};
         final String[] VDescuela = {"Sistemas","Quimica"};
         final String[] VDcodigogrupo = {"01","02"};
@@ -264,7 +265,7 @@ public class ControlBD {
 
         abrir();
         db.execSQL("DELETE FROM docente");
-
+        db.execSQL("DELETE FROM detalledocente");
 
         Docente docente = new Docente();
         for(int i=0;i<2;i++){
@@ -280,6 +281,7 @@ public class ControlBD {
             detalleDocente.setCodigoDocente(VDcodigo[i]);
             detalleDocente.setCodigoGrupo(VDcodigogrupo[i]);
             detalleDocente.setTipoRol(VDtiporol[i]);
+            detalleDocente.setNombreDocente(VDnombre[i]);
             insertar(detalleDocente);
         }
         cerrar();
