@@ -63,7 +63,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editNombre"
+        android:id="@+id/editNombreDocente"
         android:layout_below="@+id/textView6"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -74,7 +74,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Apellido"
         android:id="@+id/textView7"
-        android:layout_below="@+id/editNombre"
+        android:layout_below="@+id/editNombreDocente"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class ControlBD {
 
     private static final String[]camposDocente = new String [] {"codigodocente","nombredocente","apellidodocente","escuela"};
-    private static final String[]camposDetalleDocente = new String [] {"codigo","codigogrupo","tiporol"};
+    private static final String[]camposDetalleDocente = new String [] {"codigo","codigogrupo","tiporol","nombredocente"};
 
 
     private final Context context;
@@ -100,6 +100,22 @@ public class ControlBD {
         }
     }
 
+    public String actualizar(DetalleDocente detalleDocente) {
+        if(verificarIntegridad(detalleDocente, 3)){
+
+            String[] id = {detalleDocente.getCodigoDocente()};
+            ContentValues cv = new ContentValues();
+            cv.put("codigo", detalleDocente.getCodigoDocente());
+            cv.put("codigogrupo", detalleDocente.getCodigoGrupo());
+            cv.put("tiporol", detalleDocente.getTipoRol());
+            cv.put("nombredocente", detalleDocente.getNombreDocente());
+            db.update("detalledocente", cv, "codigo = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con codigo " + detalleDocente.getCodigoDocente() + " no existe";
+        }
+    }
+
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -114,7 +130,7 @@ public class ControlBD {
         public void onCreate(SQLiteDatabase db) {
             try{
                 db.execSQL("CREATE TABLE docente(codigodocente VARCHAR(7) NOT NULL PRIMARY KEY, nombredocente VARCHAR(30),apellidodocente VARCHAR(30),escuela VARCHAR(30));");
-                db.execSQL("CREATE TABLE detalledocente(codigo VARCHAR(6) NOT NULL PRIMARY KEY,codigogrupo VARCHAR(30),tiporol VARCHAR(30));");
+                db.execSQL("CREATE TABLE detalledocente(codigo VARCHAR(6) NOT NULL PRIMARY KEY,codigogrupo VARCHAR(30),tiporol VARCHAR(30),nombredocente VARCHAR(30));");
 
             }catch(SQLException e){
                 e.printStackTrace();
@@ -172,11 +188,12 @@ public class ControlBD {
         }
         else
         {
-            ContentValues alum = new ContentValues();
-            alum.put("codigo", detalledocente.getCodigoDocente());
-            alum.put("codigogrupo", detalledocente.getCodigoGrupo());
-            alum.put("tiporol", detalledocente.getTipoRol());
-            contador=db.insert("detalledocente", null, alum);
+            ContentValues doc = new ContentValues();
+            doc.put("codigo", detalledocente.getCodigoDocente());
+            doc.put("codigogrupo", detalledocente.getCodigoGrupo());
+            doc.put("tiporol", detalledocente.getTipoRol());
+            doc.put("nombredocente", detalledocente.getNombreDocente());
+            contador=db.insert("detalledocente", null, doc);
             regInsertados=regInsertados+contador;
 
         }
@@ -233,7 +250,7 @@ public class ControlBD {
                 return false;
 
 
-    }
+        }
     }
 
     public String llenarBD(){
@@ -242,6 +259,8 @@ public class ControlBD {
         final String[] VDnombre = {"Waler","Cristian"};
         final String[] VDapellido = {"Lemus","Sosa"};
         final String[] VDescuela = {"Sistemas","Quimica"};
+        final String[] VDcodigogrupo = {"01","02"};
+        final String[] VDtiporol = {"Jurado","Docente"};
 
         abrir();
         db.execSQL("DELETE FROM docente");
@@ -256,13 +275,15 @@ public class ControlBD {
             insertar(docente);
         }
 
-
-
+        DetalleDocente detalleDocente = new DetalleDocente();
+        for(int i=0;i<2; i++) {
+            detalleDocente.setCodigoDocente(VDcodigo[i]);
+            detalleDocente.setCodigoGrupo(VDcodigogrupo[i]);
+            detalleDocente.setTipoRol(VDtiporol[i]);
+            insertar(detalleDocente);
+        }
         cerrar();
-        return "Guardo Correctamente";
+        return "Tablas LLenadas con exito";
     }
-
-
-
 
 }

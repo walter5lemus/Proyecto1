@@ -20,7 +20,7 @@ public class DocenteConsultar extends Activity {
         setContentView(R.layout.activity_docente_consultar);
         helper = new ControlBD(this);
         editCodigo = (EditText) findViewById(R.id.editCodigo);
-        editNombre = (EditText) findViewById(R.id.editNombre);
+        editNombre = (EditText) findViewById(R.id.editNombreDocente);
         editApellido = (EditText) findViewById(R.id.editApellido);
         editEscuela = (EditText) findViewById(R.id.editEscuela);
     }

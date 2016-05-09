@@ -8,6 +8,7 @@ public class DetalleDocente extends AppCompatActivity {
     private String codigoDocente;
     private String codigoGrupo;
     private String tipoRol;
+    private String nombreDocente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +38,13 @@ public class DetalleDocente extends AppCompatActivity {
 
     public void setTipoRol(String tipoRol) {
         this.tipoRol = tipoRol;
+    }
+
+    public String getNombreDocente() {
+        return nombreDocente;
+    }
+
+    public void setNombreDocente(String nombreDocente) {
+        this.nombreDocente = nombreDocente;
     }
 }

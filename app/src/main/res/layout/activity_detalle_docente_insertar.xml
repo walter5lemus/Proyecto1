@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Codigo de Grupo"
+        android:text="Nombre"
         android:id="@+id/textView15"
         android:layout_below="@+id/editCodigo"
         android:layout_alignParentLeft="true"
@@ -40,7 +40,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editCodGrupo"
+        android:id="@+id/editNombreDocente"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView15"
         android:layout_alignParentLeft="true" />
@@ -51,7 +51,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Tipo de Rol"
         android:id="@+id/textView16"
-        android:layout_below="@+id/editCodGrupo"
+        android:layout_below="@+id/editCodigoGrupo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -59,19 +59,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editTipoRol"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView16"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Insertar"
         android:id="@+id/btnInsertar"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/textView16"
-        android:layout_alignEnd="@+id/textView16"
-        android:onClick="insertarDetalleDocente" />
+        android:onClick="insertarDetalleDocente"
+        android:layout_below="@+id/editTipoRol"
+        android:layout_toRightOf="@+id/textView14"
+        android:layout_toEndOf="@+id/textView14" />
 
     <Button
         android:layout_width="wrap_content"
@@ -79,6 +79,27 @@
         android:text="Limpiar"
         android:id="@+id/btnLimpiar"
         android:layout_alignTop="@+id/btnInsertar"
-        android:layout_toRightOf="@+id/textView15"
-        android:layout_toEndOf="@+id/textView15" />
+        android:layout_toRightOf="@+id/textView24"
+        android:layout_toEndOf="@+id/textView24"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Codigo de Grupo"
+        android:id="@+id/textView24"
+        android:layout_below="@+id/editNombreDocente"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editCodigoGrupo"
+        android:layout_below="@+id/textView24"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
