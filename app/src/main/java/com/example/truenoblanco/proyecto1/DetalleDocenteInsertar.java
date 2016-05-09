@@ -14,7 +14,6 @@ public class DetalleDocenteInsertar extends Activity {
     EditText editCodigo;
     EditText editCodigoGrupo;
     EditText editTipoRol;
-    EditText editNombreDocente;
     Spinner spinnerl;
 
     final String[] datos = new String[]{"Jurado","Docente"};
@@ -53,7 +52,12 @@ public class DetalleDocenteInsertar extends Activity {
         helper.abrir();
         regInsertados=helper.insertar(detalledocente);
         helper.cerrar();
+        if(regInsertados.equals(true)){
         Toast.makeText(this, regInsertados, Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, "Falta registro en tabla docente o grupo", Toast.LENGTH_LONG).show();
+        }
+
     }
     public void limpiarTexto(View v) {
         editCodigo.setText("");

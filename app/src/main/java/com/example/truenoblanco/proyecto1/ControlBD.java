@@ -76,7 +76,7 @@ public class ControlBD {
             //Eliminacion en cascada
             String regAfectados="filas afectadas= ";
             int contador=0;
-            if (verificarIntegridad(detalleDocente,3)) {
+            if (verificarIntegridad(detalleDocente,4)) {
                 contador+=db.delete("docente", "codigodocente='"+detalleDocente.getCodigoDocente()+"'", null);
             }
             contador+=db.delete("detalledocente", "codigo='"+detalleDocente.getCodigoDocente()+"'", null);
@@ -184,8 +184,8 @@ public class ControlBD {
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
 
-        if (verificarIntegridad(detalledocente,3)) {
-            regInsertados= "Error al Insertar el Detalle del Docente, ya existe un detalle con ese codigo";
+        if (verificarIntegridad(detalledocente,4)) {
+            regInsertados= "Error al ingresar, verifique si el codigo docente y codigo grupo estan ingresados";
         }
         else
         {
@@ -211,8 +211,8 @@ public class ControlBD {
             case 1:
             {
                 //verificar que exista docente
-                Docente docente2 = (Docente)dato;
-                String[] id = {docente2.getCodigoDocente()};
+                Docente docente = (Docente)dato;
+                String[] id = {docente.getCodigoDocente()};
                 abrir();
                 Cursor c2 = db.query("docente", null, "codigodocente = ?", id, null, null, null);
                 if(c2.moveToFirst()){
@@ -243,8 +243,28 @@ public class ControlBD {
                 }
                 return false;
             }
+            case 4: {
+                //verifica que exista codigogrupo en tabla grupo y codigodocente en la tabla docente
+                DetalleDocente detalleDocente = (DetalleDocente) dato;
+                String[] id1 = {detalleDocente.getCodigoDocente()};
+                String[] id2 = {detalleDocente.getCodigoGrupo()};
+                //abrir();
 
+                try {
+                Cursor cursor1 = db.query("docente", null, "codigodocente = ?", id1, null, null, null);
+                //Cursor cursor2 = null;
+                Cursor cursor2 = db.query("grupo", null, "codigogrupo = ?", id2, null, null, null);
 
+                    if (cursor1.moveToFirst() && cursor2.moveToFirst()) {
+                        //Se encontraron datos
+                        return true;
+                    }
+                }
+                catch (Exception e) {
+                    return false;
+                }
+
+            }
 
 
             default:
