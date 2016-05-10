@@ -55,7 +55,7 @@ public class DetalleDocenteInsertar extends Activity {
         if(regInsertados.equals(true)){
         Toast.makeText(this, regInsertados, Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(this, "Falta registro en tabla docente o grupo", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error al ingresar, Falta registro en tabla docente o grupo", Toast.LENGTH_LONG).show();
         }
 
     }
