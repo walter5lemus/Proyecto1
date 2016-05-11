@@ -13,7 +13,7 @@ public class DetalleDocenteInsertar extends Activity {
     ControlBD helper;
     EditText editCodigo;
     EditText editCodigoGrupo;
-    EditText editTipoRol;
+    //EditText editTipoRol;
     Spinner spinnerl;
     EditText editNombre;
 
@@ -31,7 +31,7 @@ public class DetalleDocenteInsertar extends Activity {
 
         editCodigo = (EditText) findViewById(R.id.editCodigo);
         editCodigoGrupo = (EditText) findViewById(R.id.editCodigoGrupo);
-        editTipoRol = (EditText) findViewById(R.id.editTipoRol);
+        //editTipoRol = (EditText) findViewById(R.id.editTipoRol);
         editNombre = (EditText) findViewById(R.id.editNombreDocente);
         spinnerl.setAdapter(adapter);
 
@@ -39,13 +39,12 @@ public class DetalleDocenteInsertar extends Activity {
     public void insertarDetalleDocente(View v) {
         String regInsertados;
         String codigo=editCodigo.getText().toString();
-        String codigogrupo=editCodigoGrupo.getText().toString();
+        int codigogrupo=Integer.parseInt(editCodigoGrupo.getText().toString());
         String selec = spinnerl.getSelectedItem().toString();
         String nombre = editNombre.getText().toString();
 
 
         DetalleDocente detalledocente= new DetalleDocente();
-        detalledocente.setCodigoDocente(codigo);
         detalledocente.setCodigoDocente(codigo);
         detalledocente.setCodigoGrupo(codigogrupo);
         detalledocente.setTipoRol(selec);
@@ -54,17 +53,15 @@ public class DetalleDocenteInsertar extends Activity {
 
         regInsertados=helper.insertar(detalledocente);
         helper.cerrar();
-        /*if(regInsertados.equals(true)){*/
+
         Toast.makeText(this, regInsertados, Toast.LENGTH_LONG).show();
-        /*}else{
-            Toast.makeText(this, "Error al ingresar, Falta registro en tabla docente o grupo", Toast.LENGTH_LONG).show();
-        }*/
+
 
     }
     public void limpiarTexto(View v) {
         editCodigo.setText("");
         editCodigoGrupo.setText("");
-        editTipoRol.setText("");
+
         editNombre.setText("");
     }
 }

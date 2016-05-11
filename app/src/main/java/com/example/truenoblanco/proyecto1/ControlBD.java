@@ -76,9 +76,6 @@ public class ControlBD {
         //Eliminacion en cascada
         String regAfectados="filas afectadas= ";
         int contador=0;
-        if (verificarIntegridad(detalleDocente,3)) {
-            contador+=db.delete("docente", "codigodocente='"+detalleDocente.getCodigoDocente()+"'", null);
-        }
         contador+=db.delete("detalledocente", "codigo='"+detalleDocente.getCodigoDocente()+"'", null);
         regAfectados+=contador;
         return regAfectados;
@@ -92,7 +89,7 @@ public class ControlBD {
         if(cursor.moveToFirst()){
             DetalleDocente detalledocente = new DetalleDocente();
             detalledocente.setCodigoDocente(cursor.getString(0));
-            detalledocente.setCodigoGrupo(cursor.getString(1));
+            detalledocente.setCodigoGrupo(cursor.getInt(1));
             detalledocente.setTipoRol(cursor.getString(2));
             detalledocente.setNombreDocente(cursor.getString(3));
 
@@ -133,7 +130,7 @@ public class ControlBD {
         public void onCreate(SQLiteDatabase db) {
             try{
                 db.execSQL("CREATE TABLE docente(codigodocente VARCHAR(7) NOT NULL PRIMARY KEY, nombredocente VARCHAR(30),apellidodocente VARCHAR(30),escuela VARCHAR(30));");
-                db.execSQL("CREATE TABLE detalledocente(codigo VARCHAR(7) NOT NULL PRIMARY KEY,codigogrupo VARCHAR(30),tiporol VARCHAR(30),nombredocente VARCHAR(30));");
+                db.execSQL("CREATE TABLE detalledocente(codigo VARCHAR(7) NOT NULL PRIMARY KEY,codigogrupo INTEGER,tiporol VARCHAR(30),nombredocente VARCHAR(30));");
 
             }catch(SQLException e){
                 e.printStackTrace();
@@ -256,7 +253,7 @@ public class ControlBD {
                 //verifica que al insertar detalle docente exista codigo_grupo en tabla grupo y codigo_docente en la tabla docente
                 DetalleDocente detalleDocente = (DetalleDocente) dato;
                 String[] id1 = {detalleDocente.getCodigoDocente()};
-                String[] id2 = {detalleDocente.getCodigoGrupo()};
+                String[] id2 = {String.valueOf(detalleDocente.getCodigoGrupo())};
                 //abrir();
 
                     Cursor cursor1 = db.query("docente", null, "codigodocente = ?", id1, null, null, null);
@@ -292,7 +289,7 @@ public class ControlBD {
         final String[] VDnombre = {"Walter","Cristian"};
         final String[] VDapellido = {"Lemus","Sosa"};
         final String[] VDescuela = {"Sistemas","Quimica"};
-        final String[] VDcodigogrupo = {"01","02"};
+        final int[] VDcodigogrupo = {01,02};
         final String[] VDtiporol = {"Jurado","Docente"};
 
         abrir();
