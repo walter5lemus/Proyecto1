@@ -13,8 +13,8 @@ import android.widget.Toast;
  */
 public class ControlBD {
 
-    private static final String[]camposDocente = new String [] {"codigo_docente","nombres_docente","apellidos_docente","escuela"};
-    private static final String[]camposDetalleDocente = new String [] {"codigo_docente","codigo_grupo","tipo_rol","nombres_docente"};
+    private static final String[]camposDocente = new String [] {"codigodocente","nombredocente","apellidodocente","escuela"};
+    private static final String[]camposDetalleDocente = new String [] {"codigo","codigogrupo","tiporol","nombredocente"};
 
 
     private final Context context;
@@ -28,10 +28,10 @@ public class ControlBD {
 
     }
 
-    public Docente consultarDocente(String codigo_docente) {
-        String[] id = {codigo_docente};
+    public Docente consultarDocente(String codigo) {
+        String[] id = {codigo};
 
-        Cursor cursor = db.query("docente", camposDocente, "codigo_docente = ?", id, null, null, null);
+        Cursor cursor = db.query("docente", camposDocente, "codigodocente = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             Docente docente = new Docente();
             docente.setCodigoDocente(cursor.getString(0));
@@ -50,13 +50,13 @@ public class ControlBD {
 
             String[] id = {docente.getCodigoDocente()};
             ContentValues cv = new ContentValues();
-            cv.put("nombres_docente", docente.getNombreDocente());
-            cv.put("apellidos_docente", docente.getApellidoDocente());
+            cv.put("nombredocente", docente.getNombreDocente());
+            cv.put("apellidodocente", docente.getApellidoDocente());
             cv.put("escuela", docente.getEscuela());
-            db.update("docente", cv, "codigo_docente = ?", id);
+            db.update("docente", cv, "codigodocente = ?", id);
             return "Registro Actualizado Correctamente";
         }else{
-            return "Registro con codigo_docente " + docente.getCodigoDocente() + " no existe";
+            return "Registro con codigo " + docente.getCodigoDocente() + " no existe";
         }
     }
 
@@ -65,36 +65,37 @@ public class ControlBD {
         String regAfectados="filas afectadas= ";
         int contador=0;
         if (verificarIntegridad(docente,2)) {
-            contador+=db.delete("detalledocente", "codigo_docente='"+docente.getCodigoDocente()+"'", null);
+            contador+=db.delete("detalledocente", "codigo='"+docente.getCodigoDocente()+"'", null);
         }
-        contador+=db.delete("docente", "codigo_docente='"+docente.getCodigoDocente()+"'", null);
+        contador+=db.delete("docente", "codigodocente='"+docente.getCodigoDocente()+"'", null);
         regAfectados+=contador;
         return regAfectados;
     }
 
     public String eliminar(DetalleDocente detalleDocente) {
-            //Eliminacion en cascada
-            String regAfectados="filas afectadas= ";
-            int contador=0;
-            if (verificarIntegridad(detalleDocente,4)) {
-                contador+=db.delete("docente", "codigo_docente='"+detalleDocente.getCodigoDocente()+"'", null);
-            }
-            contador+=db.delete("detalledocente", "codigo_docente='"+detalleDocente.getCodigoDocente()+"'", null);
-            regAfectados+=contador;
-            return regAfectados;
+        //Eliminacion en cascada
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        if (verificarIntegridad(detalleDocente,3)) {
+            contador+=db.delete("docente", "codigodocente='"+detalleDocente.getCodigoDocente()+"'", null);
+        }
+        contador+=db.delete("detalledocente", "codigo='"+detalleDocente.getCodigoDocente()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
 
     }
 
-    public DetalleDocente consultarDetalleDocente(String codigo_docente) {
-        String[] id = {codigo_docente};
+    public DetalleDocente consultarDetalleDocente(String codigo) {
+        String[] id = {codigo};
 
-        Cursor cursor = db.query("detalledocente", camposDetalleDocente, "codigo_docente = ?", id, null, null, null);
+        Cursor cursor = db.query("detalledocente", camposDetalleDocente, "codigo = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             DetalleDocente detalledocente = new DetalleDocente();
             detalledocente.setCodigoDocente(cursor.getString(0));
             detalledocente.setCodigoGrupo(cursor.getString(1));
             detalledocente.setTipoRol(cursor.getString(2));
             detalledocente.setNombreDocente(cursor.getString(3));
+
             return detalledocente;
         }else{
             return null;
@@ -106,14 +107,15 @@ public class ControlBD {
 
             String[] id = {detalleDocente.getCodigoDocente()};
             ContentValues cv = new ContentValues();
-            cv.put("codigo_docente", detalleDocente.getCodigoDocente());
-            cv.put("codigo_grupo", detalleDocente.getCodigoGrupo());
-            cv.put("tipo_rol", detalleDocente.getTipoRol());
-            cv.put("nombres_docente", detalleDocente.getNombreDocente());
-            db.update("detalledocente", cv, "codigo_docente = ?", id);
+            cv.put("codigo", detalleDocente.getCodigoDocente());
+            cv.put("codigogrupo", detalleDocente.getCodigoGrupo());
+            cv.put("tiporol", detalleDocente.getTipoRol());
+            cv.put("nombredocente",detalleDocente.getNombreDocente());
+
+            db.update("detalledocente", cv, "codigo = ?", id);
             return "Registro Actualizado Correctamente";
         }else{
-            return "Registro con codigo_docente " + detalleDocente.getCodigoDocente() + " no existe";
+            return "Registro con codigo " + detalleDocente.getCodigoDocente() + " no existe";
         }
     }
 
@@ -130,8 +132,8 @@ public class ControlBD {
         @Override
         public void onCreate(SQLiteDatabase db) {
             try{
-                db.execSQL("CREATE TABLE docente(codigo_docente VARCHAR(7) NOT NULL PRIMARY KEY, nombres_docente VARCHAR(30),apellidos_docente VARCHAR(30),escuela VARCHAR(30));");
-                db.execSQL("CREATE TABLE detalledocente(codigo_docente VARCHAR(6) NOT NULL PRIMARY KEY,codigo_grupo VARCHAR(30),tipo_rol VARCHAR(30),nombres_docente VARCHAR(30));");
+                db.execSQL("CREATE TABLE docente(codigodocente VARCHAR(7) NOT NULL PRIMARY KEY, nombredocente VARCHAR(30),apellidodocente VARCHAR(30),escuela VARCHAR(30));");
+                db.execSQL("CREATE TABLE detalledocente(codigo VARCHAR(7) NOT NULL PRIMARY KEY,codigogrupo VARCHAR(30),tiporol VARCHAR(30),nombredocente VARCHAR(30));");
 
             }catch(SQLException e){
                 e.printStackTrace();
@@ -162,14 +164,14 @@ public class ControlBD {
         long contador=0;
 
         if (verificarIntegridad(docente,1)) {
-            regInsertados= "Error al Insertar docente, ya existe un docente con ese codigo_docente";
-       }
+            regInsertados= "Error al Insertar docente, ya existe un docente con ese codigo";
+        }
         else
         {
             ContentValues doc = new ContentValues();
-            doc.put("codigo_docente", docente.getCodigoDocente());
-            doc.put("nombres_docente", docente.getNombreDocente());
-            doc.put("apellidos_docente", docente.getApellidoDocente());
+            doc.put("codigodocente", docente.getCodigoDocente());
+            doc.put("nombredocente", docente.getNombreDocente());
+            doc.put("apellidodocente", docente.getApellidoDocente());
             doc.put("escuela", docente.getEscuela());
             contador=db.insert("docente", null, doc);
             regInsertados=regInsertados+contador;
@@ -184,20 +186,27 @@ public class ControlBD {
         String regInsertados="Registro Insertado Nº= ";
         long contador=0;
 
-        if (verificarIntegridad(detalledocente,4)) {
-            regInsertados= "Error al ingresar, verifique si el codigo_docente docente y codigo_docente grupo estan ingresados";
-        }
-        else
-        {
-            ContentValues doc = new ContentValues();
-            doc.put("codigo_docente", detalledocente.getCodigoDocente());
-            doc.put("codigo_grupo", detalledocente.getCodigoGrupo());
-            doc.put("tipo_rol", detalledocente.getTipoRol());
-            doc.put("nombres_docente", detalledocente.getNombreDocente());
-            contador=db.insert("detalledocente", null, doc);
-            regInsertados=regInsertados+contador;
+        if(verificarIntegridad(detalledocente,4)){
 
+            ContentValues alum = new ContentValues();
+            alum.put("codigo", detalledocente.getCodigoDocente());
+            alum.put("codigogrupo", detalledocente.getCodigoGrupo());
+            alum.put("tiporol", detalledocente.getTipoRol());
+            alum.put("nombredocente", detalledocente.getNombreDocente());
+            contador = db.insert("detalledocente", null, alum);
+            if (contador == -1 || contador == 0) {
+                regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+            } else {
+                regInsertados = regInsertados + contador;
+            }
+
+            //}
         }
+        else{
+
+            regInsertados = "no existe el codigo docente";
+        }
+
 
         return regInsertados;
     }
@@ -211,10 +220,10 @@ public class ControlBD {
             case 1:
             {
                 //verificar que exista docente
-                Docente docente = (Docente)dato;
-                String[] id = {docente.getCodigoDocente()};
+                Docente docente2 = (Docente)dato;
+                String[] id = {docente2.getCodigoDocente()};
                 abrir();
-                Cursor c2 = db.query("docente", null, "codigo_docente = ?", id, null, null, null);
+                Cursor c2 = db.query("docente", null, "codigodocente = ?", id, null, null, null);
                 if(c2.moveToFirst()){
                     //Se encontro Docente
                     return true;
@@ -224,7 +233,7 @@ public class ControlBD {
             case 2:
             {
                 Docente docente = (Docente)dato;
-                Cursor c=db.query(true, "detalledocente", new String[] {"codigo_docente" }, "codigo_docente='"+docente.getCodigoDocente()+"'",null, null, null, null, null);
+                Cursor c=db.query(true, "detalledocente", new String[] {"codigo" }, "codigo='"+docente.getCodigoDocente()+"'",null, null, null, null, null);
                 if(c.moveToFirst())
                     return true;
                 else
@@ -232,11 +241,11 @@ public class ControlBD {
             }
             case 3:
             {
-                //verificar que exista codigo_docente de docente en Detalle docente
+                //verificar que exista codigo de docente en Detalle docente
                 DetalleDocente detalleDocente2 = (DetalleDocente)dato;
                 String[] idm = {detalleDocente2.getCodigoDocente()};
                 abrir();
-                Cursor cm = db.query("detalledocente", null, "codigo_docente = ?", idm, null, null, null);
+                Cursor cm = db.query("detalledocente", null, "codigo = ?", idm, null, null, null);
                 if(cm.moveToFirst()){
                     //Se encontro Materia
                     return true;
@@ -244,27 +253,30 @@ public class ControlBD {
                 return false;
             }
             case 4: {
-                //verifica que exista codigo_grupo en tabla grupo y codigo_docente en la tabla docente
+                //verifica que al insertar detalle docente exista codigo_grupo en tabla grupo y codigo_docente en la tabla docente
                 DetalleDocente detalleDocente = (DetalleDocente) dato;
                 String[] id1 = {detalleDocente.getCodigoDocente()};
                 String[] id2 = {detalleDocente.getCodigoGrupo()};
                 //abrir();
 
-                try {
-                Cursor cursor1 = db.query("docente", null, "codigo_docente = ?", id1, null, null, null);
-                //Cursor cursor2 = null;
-                Cursor cursor2 = db.query("grupo", null, "codigo_grupo = ?", id2, null, null, null);
+                    Cursor cursor1 = db.query("docente", null, "codigodocente = ?", id1, null, null, null);
+                   // Cursor cursor2 = null;
+                 //Cursor cursor2 = db.query("grupo", null, "codigo_grupo = ?", id2, null, null, null);
 
-                    if (cursor1.moveToFirst() && cursor2.moveToFirst()) {
+                    if (cursor1.moveToFirst() /*&& cursor2.moveToFirst()*/){
                         //Se encontraron datos
                         return true;
+
+                    }else{
+                        return false;
                     }
-                }
-                catch (Exception e) {
-                    return false;
-                }
+
 
             }
+
+
+
+
 
 
             default:
@@ -276,12 +288,12 @@ public class ControlBD {
 
     public String llenarBD(){
 
-        final String[] VDcodigo_docente = {"LV10022","SC12054"};
+        final String[] VDcodigo = {"LV10022","SC12054"};
         final String[] VDnombre = {"Walter","Cristian"};
         final String[] VDapellido = {"Lemus","Sosa"};
         final String[] VDescuela = {"Sistemas","Quimica"};
-        final String[] VDcodigo_grupo = {"01","02"};
-        final String[] VDtipo_rol = {"Jurado","Docente"};
+        final String[] VDcodigogrupo = {"01","02"};
+        final String[] VDtiporol = {"Jurado","Docente"};
 
         abrir();
         db.execSQL("DELETE FROM docente");
@@ -289,7 +301,7 @@ public class ControlBD {
 
         Docente docente = new Docente();
         for(int i=0;i<2;i++){
-            docente.setCodigoDocente(VDcodigo_docente[i]);
+            docente.setCodigoDocente(VDcodigo[i]);
             docente.setNombreDocente(VDnombre[i]);
             docente.setApellidoDocente(VDapellido[i]);
             docente.setEscuela(VDescuela[i]);
@@ -298,10 +310,11 @@ public class ControlBD {
 
         DetalleDocente detalleDocente = new DetalleDocente();
         for(int i=0;i<2; i++) {
-            detalleDocente.setCodigoDocente(VDcodigo_docente[i]);
-            detalleDocente.setCodigoGrupo(VDcodigo_grupo[i]);
-            detalleDocente.setTipoRol(VDtipo_rol[i]);
+            detalleDocente.setCodigoDocente(VDcodigo[i]);
+            detalleDocente.setCodigoGrupo(VDcodigogrupo[i]);
+            detalleDocente.setTipoRol(VDtiporol[i]);
             detalleDocente.setNombreDocente(VDnombre[i]);
+
             insertar(detalleDocente);
         }
         cerrar();

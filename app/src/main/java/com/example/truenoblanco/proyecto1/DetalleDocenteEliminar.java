@@ -25,9 +25,10 @@ public class DetalleDocenteEliminar extends Activity {
         regEliminadas=controlhelper.eliminar(detalleDocente);
         controlhelper.cerrar();
         if(regEliminadas.equals(true)){
-            Toast.makeText(this, regEliminadas, Toast.LENGTH_LONG).show();
-        }else{
             Toast.makeText(this, "Error al eliminar, Falta registro en tabla docente o grupo", Toast.LENGTH_LONG).show();
+
+        }else{
+            Toast.makeText(this, regEliminadas, Toast.LENGTH_LONG).show();
         }
     }
 
