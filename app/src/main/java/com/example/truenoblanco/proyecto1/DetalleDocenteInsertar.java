@@ -13,7 +13,6 @@ public class DetalleDocenteInsertar extends Activity {
     ControlBD helper;
     EditText editCodigo;
     EditText editCodigoGrupo;
-    //EditText editTipoRol;
     Spinner spinnerl;
     EditText editNombre;
 
@@ -31,7 +30,6 @@ public class DetalleDocenteInsertar extends Activity {
 
         editCodigo = (EditText) findViewById(R.id.editCodigo);
         editCodigoGrupo = (EditText) findViewById(R.id.editCodigoGrupo);
-        //editTipoRol = (EditText) findViewById(R.id.editTipoRol);
         editNombre = (EditText) findViewById(R.id.editNombreDocente);
         spinnerl.setAdapter(adapter);
 
@@ -64,4 +62,7 @@ public class DetalleDocenteInsertar extends Activity {
 
         editNombre.setText("");
     }
+
+
+
 }

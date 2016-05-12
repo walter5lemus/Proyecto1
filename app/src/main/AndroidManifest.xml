@@ -27,7 +27,9 @@
         <activity android:name=".DetalleDocenteEliminar" />
         <activity android:name=".DetalleDocenteInsertar" />
         <activity android:name=".DetalleDocenteMenu" />
-        <activity android:name=".ControlBD"></activity>
+        <activity android:name=".ControlBD" />
+        <activity android:name=".Proyecto1Activity1" />
+        <activity android:name=".SingUp"></activity>
     </application>
 
 </manifest>

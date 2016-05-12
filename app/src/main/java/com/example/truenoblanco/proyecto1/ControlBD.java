@@ -131,6 +131,11 @@ public class ControlBD {
             try{
                 db.execSQL("CREATE TABLE docente(codigodocente VARCHAR(7) NOT NULL PRIMARY KEY, nombredocente VARCHAR(30),apellidodocente VARCHAR(30),escuela VARCHAR(30));");
                 db.execSQL("CREATE TABLE detalledocente(codigo VARCHAR(7) NOT NULL PRIMARY KEY,codigogrupo INTEGER,tiporol VARCHAR(30),nombredocente VARCHAR(30));");
+                db.execSQL("CREATE TABLE usuario(idusuario CHARACTER(2) NOT NULL PRIMARY KEY,nomusuario VARCHAR(30),clave CHARACTER(5));");
+                db.execSQL("CREATE TABLE accesousuario(idopcion CHARACTER(3) NOT NULL PRIMARY KEY,idusuario CHARACTER(2));");
+                db.execSQL("CREATE TABLE opcioncrud(idopcion CHARACTER(3) NOT NULL PRIMARY KEY,desopcion VARCHAR(30),numcrud INTEGER);");
+
+
 
             }catch(SQLException e){
                 e.printStackTrace();
@@ -283,7 +288,9 @@ public class ControlBD {
         }
     }
 
+
     public String llenarBD(){
+
 
         final String[] VDcodigo = {"LV10022","SC12054"};
         final String[] VDnombre = {"Walter","Cristian"};
@@ -295,6 +302,9 @@ public class ControlBD {
         abrir();
         db.execSQL("DELETE FROM docente");
         db.execSQL("DELETE FROM detalledocente");
+
+
+
 
         Docente docente = new Docente();
         for(int i=0;i<2;i++){

@@ -6,6 +6,7 @@
     <string name="escuela">escuela</string>
     <string name="insertar">insertar</string>
     <string name="limpiar">limpiar</string>
+    <string name="action_settings" />
     <string-array name="valores_array">
         <item>Jurado</item>
         <item>Docente</item>
